@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/resistan/reactwit/static/css/main.92e8c67e.css",
+    "main.js": "/resistan/reactwit/static/js/main.08dbac42.js",
+    "index.html": "/resistan/reactwit/index.html",
+    "main.92e8c67e.css.map": "/resistan/reactwit/static/css/main.92e8c67e.css.map",
+    "main.08dbac42.js.map": "/resistan/reactwit/static/js/main.08dbac42.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92e8c67e.css",
+    "static/js/main.08dbac42.js"
+  ]
+}
