@@ -1,0 +1,29 @@
+nav {
+	position: relative;
+	padding: 10px 0 20px;
+
+	.home {
+		text-align: center;
+	}
+
+	ul {
+		position: absolute;
+		top: 0;
+		right: 0;
+		list-style: none;
+
+		li a {
+
+			img,
+			svg {
+				height: 1.2em;
+				vertical-align: middle;
+				margin-right: 6px;
+			}
+
+			img {
+				border-radius: 50%;
+			}
+		}
+	}
+}

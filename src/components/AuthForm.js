@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { authService } from "fbase";
+import "scss/authForm.scss"
 
 const AuthForm = () => {
 	const [email, setEmail] = useState('');
@@ -35,12 +36,12 @@ const AuthForm = () => {
 	}
 	return (
 		<>
-			<h1>{newAccount ? "Create Account" : "Log In"} <button onClick={toggleAccount}>{newAccount ? "Log In" : "Create account"}</button></h1>
-			<form onSubmit={onSumbit}>
-				<p>{error ? error : ""}</p>
-				<input type="email" name="email" placeholder="Email" required value={email} onChange={onChange} />
-				<input type="password" name="password" placeholder="Password" required value={password} onChange={onChange} />
-				<input type="submit" value={newAccount ? "Create Account" : "Log in"} />
+			<h1>{newAccount ? "Create Account" : "Log In"} <button onClick={toggleAccount} className="authSwitch">{newAccount ? "Log In" : "Create account"}</button></h1>
+			<form onSubmit={onSumbit} className="container">
+				{error && <p className="error">{error}</p>}
+				<input type="email" name="email" placeholder="Email" required value={email} onChange={onChange} className="authInput" />
+				<input type="password" name="password" placeholder="Password" required value={password} onChange={onChange}  className="authInput" />
+				<input type="submit" value={newAccount ? "Create Account" : "Log in"} className="authInput authSubmit"/>
 			</form>
 		</>
 	)

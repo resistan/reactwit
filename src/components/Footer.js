@@ -1,5 +1,5 @@
 const Footer = () => (
-	<footer>&copy; {new Date().getFullYear()} Reactwit</footer>
+	<footer>&copy; {new Date().getFullYear()} Reactweet</footer>
 )
 
 export default Footer;

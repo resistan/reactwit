@@ -1,6 +1,9 @@
 import { signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
 import { authService } from "fbase";
 import AuthForm from "components/AuthForm";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTwitter, faGoogle, faGithub } from "@fortawesome/free-brands-svg-icons";
+import "scss/auth.scss"
 
 const Auth = () => {
 	authService.languageCode = "ko";
@@ -16,12 +19,21 @@ const Auth = () => {
 		const data = await signInWithPopup(authService, provider);
 		console.log(data)
 	}
-	return (<div>
-		<AuthForm />
-		<div>
-			<button onClick={onSocialClick} name="google">Continue with Google</button>
-			<button onClick={onSocialClick} name="github">Continue with Github</button>
+	return (
+		<div className="authContainer">
+			<FontAwesomeIcon icon={faTwitter} color={"#FFFFFF"} size="3x" />
+			<AuthForm />
+			<div className="authBtns">
+				<button onClick={onSocialClick} name="google" className="authBtn">
+					Continue with Google
+					<FontAwesomeIcon icon={faGoogle} />
+				</button>
+				<button onClick={onSocialClick} name="github" className="authBtn">
+					Continue with Github
+					<FontAwesomeIcon icon={faGithub} />
+				</button>
+			</div>
 		</div>
-	</div>)
+	)
 }
 export default Auth;

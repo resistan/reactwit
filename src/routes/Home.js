@@ -31,10 +31,12 @@ const Home = ( {userObj} ) => {
 	}, []);
 	// console.log(nweets)
 	return (
-		<>
+		<div className="container">
 			<NweetForm userObj={userObj}/>
-			{nweets.map( (nweet) => <Nweet key={nweet.id} nweetObj={nweet} isOwner={nweet.authorId === userObj.uid} /> )}
-		</>
+			<div className="itemWrap">
+				{nweets.map( (nweet) => <Nweet key={nweet.id} nweetObj={nweet} isOwner={nweet.authorId === userObj.uid} /> )}
+			</div>
+		</div>
 	)
 }
 export default Home;

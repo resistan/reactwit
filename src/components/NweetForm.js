@@ -3,11 +3,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { addDoc, collection } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { useState, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import "scss/nweetForm.scss";
 
 const NweetForm = ({userObj}) => {
 	const [nweet, setNweet] = useState('');
 	const [attachment, setAttachment] = useState("");
 	const onSubmit = async (event) => {
+		if (nweet === "") return;
 		event.preventDefault();
 		let attachmentUrl = "";
 		if(attachment !== "") {
@@ -45,14 +49,23 @@ const NweetForm = ({userObj}) => {
 		setAttachment('');
 	}
 	return (
-		<form onSubmit={onSubmit}>
-			<input type="text" placeholder="What's your mind?" maxLength="120" value={nweet} onChange={onChange} required />
-			<input ref={fileInput} type="file" accept="image/*" onChange={onFileChange}/>
-			<input type="submit" value="Reactweet" />
+		<form onSubmit={onSubmit} className="factoryForm">
+			<div className="factoryInput__container">
+				<input type="text" placeholder="What's your mind?" maxLength="120" value={nweet} onChange={onChange} required className="factoryInput__input" />
+				<input type="submit" value="&rarr;" className="factoryInput__arrow" />
+			</div>
+			<label htmlFor="attach-file" className="factoryInput__label">
+				<span>Add Photo</span>
+				<FontAwesomeIcon icon={faPlus} />
+			</label>
+			<input id="attach-file" ref={fileInput} type="file" accept="image/*" onChange={onFileChange}/>
 			{attachment &&
-				<div>
+				<div className="factoryForm__attachment">
 					<img src={attachment} width="50" height="50" alt="attachment" />
-					<button onClick={onClearAttachment}>Clear attachment</button>
+					<button onClick={onClearAttachment} className="factoryForm__clear">
+						<span>Remove</span>
+						<FontAwesomeIcon icon={faTimes} />
+					</button>
 				</div>
 			}
 			</form>

@@ -1,8 +1,10 @@
-import { async } from "@firebase/util";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencilAlt, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { dbService, storageService } from "fbase";
 import { doc, deleteDoc, updateDoc } from"firebase/firestore";
 import { ref, deleteObject } from "firebase/storage";
 import { useState } from "react";
+import "scss/nweet.scss";
 
 const Nweet = ({nweetObj, isOwner}) => {
 	// console.log(nweetObj)
@@ -32,37 +34,40 @@ const Nweet = ({nweetObj, isOwner}) => {
 	}
 
 	return (
-		<>
-		<div>
-		{
-			editing ?
-			<>
-			{isOwner && (
+		<div className="nweet">
+			{
+				editing ?
 				<>
-				<form onSubmit={onSubmit}>
-				<input type="text" placeholder="Edit your mind" value={newNweet} onChange={onChange} required/>
-				<input type="submit" value="Updatweet" />
-				</form>
-				<button onClick={onEditClick}>Cancel</button>
+				{isOwner && (
+					<>
+						<form onSubmit={onSubmit} className="container nweetEdit">
+							<input type="text" placeholder="Edit your mind" value={newNweet} onChange={onChange} required className="formInput"/>
+							<input type="submit" value="Updatweet" className="formBtn" />
+						</form>
+						<button onClick={onEditClick} className="formBtn cancelBtn">Cancel</button>
+					</>
+					)
+				}
 				</>
-				)
-			}
-			</>
-			:
-			<div>
-				<p>{nweetObj.text}
+				:
+				<div>
+					<h4>{nweetObj.text}</h4>
+					{nweetObj.attachmentUrl && <p><img src={nweetObj.attachmentUrl} alt="attachment" /></p> }
 					{isOwner &&
-						<>
-						<button onClick={onEditClick}>Edit</button>
-						<button onClick={onDeleteClick}>Delete</button>
-						</>
+						<div className="nweet__actions">
+							<button onClick={onEditClick}>
+								<FontAwesomeIcon icon={faPencilAlt} />
+								<span className="a11yHidden">Edit</span>
+							</button>
+							<button onClick={onDeleteClick}>
+								<FontAwesomeIcon icon={faTrash} />
+								<span className="a11yHidden">Delete</span>
+							</button>
+						</div>
 					}
-				</p>
-				{nweetObj.attachmentUrl && <p><img src={nweetObj.attachmentUrl} height="200" alt="attachment" /></p> }
-			</div>
-		}
+				</div>
+			}
 		</div>
-		</>
 	)
 }
 export default Nweet;

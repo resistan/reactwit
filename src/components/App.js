@@ -2,7 +2,6 @@ import { authService } from "fbase";
 import { updateProfile } from "firebase/auth";
 import AppRouter from "components/Router";
 import { useState, useEffect } from "react";
-import Footer from "components/Footer";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -33,10 +32,9 @@ function App() {
     });
   }
   return (
-    <>
+    <div className="wrap">
       {init ?  <AppRouter refreshUser={refreshUser} isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing..."}
-      <Footer />
-    </>
+    </div>
   )
 }
 
