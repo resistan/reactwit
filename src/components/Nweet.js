@@ -5,6 +5,7 @@ import { ref, deleteObject } from "firebase/storage";
 import { useState } from "react";
 
 const Nweet = ({nweetObj, isOwner}) => {
+	// console.log(nweetObj)
 	const nweetRef = doc(dbService, "reactwit",`${nweetObj.id}`);
 	const [editing, setEditing] = useState(false);
 	const [newNweet, setnewNweet] = useState(nweetObj.text);
@@ -26,7 +27,7 @@ const Nweet = ({nweetObj, isOwner}) => {
 		const ok = window.confirm("Are you sure you want to edit this nweet?");
 		if(ok) {
 			await deleteDoc(nweetRef);
-			await deleteObject(ref(storageService, nweetObj.attachmentUrl));
+			if(nweetObj.attachmentUrl) await deleteObject(ref(storageService, nweetObj.attachmentUrl));
 		}
 	}
 
@@ -57,7 +58,7 @@ const Nweet = ({nweetObj, isOwner}) => {
 						</>
 					}
 				</p>
-				{nweetObj.attachmentUrl && <p><img src={nweetObj.attachmentUrl} alt="attachment" /></p> }
+				{nweetObj.attachmentUrl && <p><img src={nweetObj.attachmentUrl} height="200" alt="attachment" /></p> }
 			</div>
 		}
 		</div>

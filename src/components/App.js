@@ -1,4 +1,5 @@
-import {authService} from "fbase";
+import { authService } from "fbase";
+import { updateProfile } from "firebase/auth";
 import AppRouter from "components/Router";
 import { useState, useEffect } from "react";
 import Footer from "components/Footer";
@@ -9,14 +10,29 @@ function App() {
   useEffect(() => {
     authService.onAuthStateChanged(user => {
       if(user) {
-        setUserObj(user);
+        if(user.displayName === null) updateProfile(userObj, {displayName: user.email.split("@")[0]});
+        setUserObj({
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+          uid: user.uid,
+          updateProfile: (args) => updateProfile(user, args)
+        });
       }
       setInit(true);
     });
   }, []);
+  const refreshUser = () => {
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      uid: user.uid,
+      updateProfile: (args) => updateProfile(user, args)
+    });
+  }
   return (
     <>
-      {init ?  <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing..."}
+      {init ?  <AppRouter refreshUser={refreshUser} isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing..."}
       <Footer />
     </>
   )

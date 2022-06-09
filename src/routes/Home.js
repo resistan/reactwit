@@ -1,6 +1,6 @@
 import { dbService, storageService } from "fbase";
 import { v4 as uuidv4 } from 'uuid';
-import { addDoc, getDocs, collection, query, orderBy, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { useState, useEffect, useRef } from "react";
 import Nweet from "components/Nweet";
@@ -9,7 +9,7 @@ const Home = ( {userObj} ) => {
 	const [nweet, setNweet] = useState('');
 	const [nweets, setNweets] = useState([]);
 	const [attachment, setAttachment] = useState("");
-	
+
 	// old method
 	// const getNweets = async() => {
 	// 	const dbNweets = await getDocs(collection(dbService, "reactwit"));
@@ -21,7 +21,7 @@ const Home = ( {userObj} ) => {
 	// 		setNweets((prev) => [nweetObj, ...prev]);
 	// 	});
 	// }
-	
+
 	useEffect( () => {
 		const q = query(collection(dbService, "reactwit"), orderBy("createdAt", "desc"));
 		onSnapshot(q, (snapshot) => {
