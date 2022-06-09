@@ -1,6 +1,7 @@
 import {authService} from "fbase";
 import AppRouter from "components/Router";
 import { useState, useEffect } from "react";
+import Footer from "components/Footer";
 
 function App() {
   const [init, setInit] = useState(false);
@@ -16,7 +17,7 @@ function App() {
   return (
     <>
       {init ?  <AppRouter isLoggedIn={Boolean(userObj)} userObj={userObj} /> : "Initializing..."}
-      <footer>&copy; {new Date().getFullYear()} Reactwit</footer>
+      <Footer />
     </>
   )
 }
